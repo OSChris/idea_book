@@ -17,9 +17,21 @@
         .row
           - if idea.user != current_user
             - if idea.joined_by?(current_user)
-              = link_to "Joined", member_path({idea_id: idea.id, id: idea.members.where(user: current_user).first.id } ), method: :delete, data: {confirm: "Are you sure you want to leave this Idea?"}, class: "btn btn-default"
+              = link_to "Joined", member_path({idea_id: idea.id, id: idea.members.where(user: current_user).first.id } ), method: :delete, data: {confirm: "Are you sure you want to leave this Idea?"}, class: "btn btn-success"
             - else
               = link_to "Join", members_path({idea_id: idea.id}), method: :post, class: "btn btn-default"
+            - if idea.liked_by?(current_user)
+              = link_to "Liked", like_path({idea_id: idea.id, id: idea.likes.where(user: current_user).first.id } ), method: :delete, class: "btn btn-primary"
+            - else
+              = link_to "Like", likes_path({idea_id: idea.id}), method: :post, class: "btn btn-default"
+          .pull-right{style: "margin-right: 4px;"}
+            Members:          
+            = idea.members.count
+            | 
+            Likes:
+            = idea.likes.count 
+
+
 
 
 

@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   
-  
-
   devise_for :users
   
+  resources :likes, only: [:create, :destroy]
   resources :members, only: [:create, :destroy]
   
   resources :ideas do 
