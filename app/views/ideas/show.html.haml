@@ -7,7 +7,14 @@
     %strong= @idea.title
     
   %p
-    = @idea.body
+    = simple_format @idea.body
+  %hr
+  .row
+    %strong Members of this Idea --
+    - @idea.members.each do |member|
+      = member.user.full_name
+      |
+      
 
 .row.well.col-xs-12.col-md-10.col-md-offset-1
   .row.col-xs-10.col-md-10.col-md-offset-1
@@ -19,7 +26,7 @@
     - if @idea.comments != nil
       - @idea.comments.each do |comment|
         .col-md-10.col-xs-10
-          = comment.body
+          = simple_format comment.body
         - if comment.user == current_user  
           .pull-right.getaway
             = button_to "Delete", [@idea, comment], method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-sm btn-danger"

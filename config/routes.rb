@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   
   resources :ideas do 
     resources :comments, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
+    resources :members, only: [:create, :destroy]
   end
 
   root 'ideas#index'

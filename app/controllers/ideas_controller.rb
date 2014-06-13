@@ -12,6 +12,8 @@ class IdeasController < ApplicationController
   # GET /ideas/1.json
   def show
     @comment = Comment.new
+    @member = @idea.members.where(user: current_user).first
+    @like = @idea.likes.where(user: current_user).first
   end
 
   # GET /ideas/new
