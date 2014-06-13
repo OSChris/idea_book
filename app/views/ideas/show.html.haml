@@ -3,6 +3,7 @@
     = link_to 'Back', ideas_path, class: "btn btn-warning"
     - if @idea.user == current_user
       = link_to 'Edit', edit_idea_path(@idea), class: "btn btn-info"
+      = link_to 'Destroy', idea_path(@idea), method: :delete, data: {confirm: "Are you sure you want to delete this Idea?"}, class: "btn btn-danger"
   %h2
     %strong= @idea.title
     
