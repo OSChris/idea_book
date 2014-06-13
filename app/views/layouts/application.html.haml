@@ -6,12 +6,18 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-
     %header.page-header
-      %h1
+      %h1 
         Idea Book
-        %small Share your ideas
-
+        %small give me all the ideas
+      %nav.navbar.navbar-default
+        %ul.nav.navbar-nav
+          %li= link_to "Home", root_path
+        %ul.nav.navbar-nav.pull-right
+          - if user_signed_in?
+            %li= link_to "Sign Out", destroy_user_session_path, method: :delete
+          - else
+            %li= link_to "Sign In", new_user_session_path
     .container
       - if flash[:notice]
         .alert.alert-success
