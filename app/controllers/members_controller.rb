@@ -8,7 +8,7 @@ class MembersController < ApplicationController
     @member.user = current_user
     if @idea.user != current_user
       @member.save
-      redirect_to root_path, notice: "You just joined '#{@idea.title}'"
+      redirect_to @idea, notice: "You just joined '#{@idea.title}'"
     else
       redirect_to root_path, alert: "Can't join your own project."
     end

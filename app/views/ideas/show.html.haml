@@ -10,6 +10,24 @@
     = simple_format @idea.body
   %hr
   .row
+    - if user_signed_in?
+      - if @idea.user != current_user
+        - if @idea.joined_by?(current_user)
+          = link_to "Joined", [@idea, @member], method: :delete, data: {confirm: "Are you sure you want to leave this Idea?"}, class: "btn btn-success"
+        - else
+          = link_to "Join", [@idea, Member.new], method: :post, class: "btn btn-default"
+        - if @idea.liked_by?(current_user)
+          = link_to "Liked", [@idea, @like], method: :delete, class: "btn btn-primary"
+        - else
+          = link_to "Like", [@idea, Like.new], method: :post, class: "btn btn-default"
+      .pull-right{style: "margin-right: 4px;"}
+        Members:          
+        = @idea.members.count
+        | 
+        Likes:
+        = @idea.likes.count 
+  %hr
+  .row
     %strong Members of this Idea --
     - @idea.members.each do |member|
       = member.user.full_name

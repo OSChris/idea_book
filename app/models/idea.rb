@@ -12,6 +12,8 @@ class Idea < ActiveRecord::Base
 
   validates :title, :body, presence: true
 
+  self.per_page = 10
+
   def joined_by?(user)
     members.exists?(user: user)
   end

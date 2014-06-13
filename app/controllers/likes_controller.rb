@@ -8,7 +8,7 @@ class LikesController < ApplicationController
     @like.user = current_user
     if @idea.user != current_user
       @like.save
-      redirect_to root_path, notice: "You just liked '#{@idea.title}'"
+      redirect_to @idea, notice: "You just liked '#{@idea.title}'"
     else
       redirect_to root_path, alert: "Can't like your own project."
     end
