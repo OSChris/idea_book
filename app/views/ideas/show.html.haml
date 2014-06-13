@@ -9,6 +9,8 @@
   %p
     = simple_format @idea.body
   %hr
+    = image_tag @idea.image.url(:medium)
+  %hr
   .row
     - if user_signed_in?
       - if @idea.user != current_user
