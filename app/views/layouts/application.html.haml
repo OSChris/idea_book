@@ -12,7 +12,7 @@
         %small give me all the ideas
       %nav.navbar.navbar-default
         %ul.nav.navbar-nav
-          %li= link_to "Home", root_path
+          %li= link_to "Home", ideas_path
         %ul.nav.navbar-nav.pull-right
           - if user_signed_in?
             %li= link_to "Hello #{current_user.full_name}", edit_user_registration_path

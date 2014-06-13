@@ -2,12 +2,16 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
-  $("#new-idea-btn").click ->
-    if ($("#create-form").is(":hidden"))
-      $("#create-form").slideDown("slow")
-      $("#new-idea-btn").text("Cancel New Idea")
-    else
-      $("#create-form").slideUp("slow")
-      $("#new-idea-btn").text("New Idea")
-    false
+ready = ->
+  $ ->
+    $("#new-idea-btn").click ->
+      if ($("#create-form").is(":hidden"))
+        $("#create-form").slideDown("slow")
+        $("#new-idea-btn").text("Cancel New Idea")
+      else
+        $("#create-form").slideUp("slow")
+        $("#new-idea-btn").text("New Idea")
+      false
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

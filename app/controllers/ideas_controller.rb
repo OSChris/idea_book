@@ -5,7 +5,7 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas  = Idea.paginate(:page => params[:page])
+    @ideas  = Idea.paginate(:page => params[:page]).order("updated_at DESC")
     @idea = Idea.new
   end
 
