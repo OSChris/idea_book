@@ -10,5 +10,8 @@
         %div
           %h2 
             #{link_to idea.title, idea}
+            %small
+              By 
+              #{idea.user.full_name}
           %p= truncate(idea.body, length: 500)
 

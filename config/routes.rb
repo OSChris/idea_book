@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   
   devise_for :users
-  resources :ideas
+  
+  resources :ideas do 
+    resources :comments, only: [:create, :destroy]
+  end
 
   root 'ideas#index'
 

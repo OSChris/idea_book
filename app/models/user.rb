@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :ideas, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
   def full_name
     if first_name || last_name
       "#{first_name} #{last_name}".squeeze.strip
@@ -11,5 +14,5 @@ class User < ActiveRecord::Base
       email
     end
   end
-  
+
 end
