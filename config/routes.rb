@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
+  
+
   devise_for :users
+  
+  resources :members, only: [:create, :destroy]
   
   resources :ideas do 
     resources :comments, only: [:create, :destroy]

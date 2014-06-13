@@ -5,7 +5,7 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.all
+    @ideas  = Idea.all
   end
 
   # GET /ideas/1
@@ -42,24 +42,32 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1
   # PATCH/PUT /ideas/1.json
   def update
-    respond_to do |format|
-      if @idea.update(idea_params)
-        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
-        format.json { render :show, status: :ok, location: @idea }
-      else
-        format.html { render :edit }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
+    if @idea.user == current_user
+      respond_to do |format|
+        if @idea.update(idea_params)
+          format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
+          format.json { render :show, status: :ok, location: @idea }
+        else
+          format.html { render :edit }
+          format.json { render json: @idea.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to @idea, alert: "That's not your Idea to edit >:("
     end
   end
 
   # DELETE /ideas/1
   # DELETE /ideas/1.json
   def destroy
-    @idea.destroy
-    respond_to do |format|
-      format.html { redirect_to ideas_url, notice: 'Idea was successfully destroyed.' }
-      format.json { head :no_content }
+    if @idea.user == current_user
+      @idea.destroy
+      respond_to do |format|
+        format.html { redirect_to ideas_url, notice: 'Idea was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to @idea, alert: "That's not your Idea to destroy >:("
     end
   end
 

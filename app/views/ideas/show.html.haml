@@ -1,7 +1,8 @@
 .row.well.col-xs-12.col-md-10.col-md-offset-1
   .row.col-md-12.getaway 
     = link_to 'Back', ideas_path, class: "btn btn-warning"
-    = link_to 'Edit', edit_idea_path(@idea), class: "btn btn-info"
+    - if @idea.user == current_user
+      = link_to 'Edit', edit_idea_path(@idea), class: "btn btn-info"
   %h2
     %strong= @idea.title
     
@@ -17,7 +18,7 @@
   .row.col-xs-10.col-md-10.col-md-offset-1
     - if @idea.comments != nil
       - @idea.comments.each do |comment|
-        .col-md-8.col-xs-8
+        .col-md-10.col-xs-10
           = comment.body
         - if comment.user == current_user  
           .pull-right.getaway
